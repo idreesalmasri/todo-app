@@ -1,13 +1,15 @@
-import React from 'react'
-import '@blueprintjs/core/lib/css/blueprint.css';
 import {Navbar} from "@blueprintjs/core";
-
-export default function Header() {
-    return (
-        <Navbar style={{backgroundColor:"rgb(14, 194, 226)"}}>
+export default function Header(props){
+    const {incomplete}=props;
+    return(
+        <>
+        {/* document.title = `To Do List: ${incomplete}`; */}
+        {/* <p style={ { backgroundColor:"#383E47" , fontWeight:"bold" , color:"white"}}>To Do List: {incomplete} items pending</p> */}
+        <Navbar style={{backgroundColor:"#252A31",marginBottom:"20px",color:"#EDEFF2"}}>
             <Navbar.Group >
-                <Navbar.Heading>HOME</Navbar.Heading>
+                <Navbar.Heading>To Do List: {incomplete} items pending</Navbar.Heading>
             </Navbar.Group>
         </Navbar>
+        </>
     )
 }

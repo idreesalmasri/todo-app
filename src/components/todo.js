@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import useForm from '../hooks/form.js';
-
+import List from './list.js';
+import Form from './form.js';
+import Pagination from './pagination';
 import { v4 as uuid } from 'uuid';
-
+import Header from './header.js';
 const ToDo = () => {
 
   const [list, setList] = useState([]);
   const [incomplete, setIncomplete] = useState([]);
-  const { handleChange, handleSubmit } = useForm(addItem);
-
+  const [currentPage,setCurrentPage]=useState(1);
+  const [itemsPerPages,setItemPerPages]=useState(3);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
   function addItem(item) {
     console.log(item);
     item.id = uuid();
+    // console.log(item.id);
     item.complete = false;
     setList([...list, item]);
+    // console.log("list",list);
   }
 
   function deleteItem(id) {
@@ -33,53 +37,27 @@ const ToDo = () => {
     setList(items);
 
   }
-
+const indexOfLastItem=currentPage*itemsPerPages;
+const indexOfFirstItem=indexOfLastItem-itemsPerPages;
+const currentItem=list.slice(indexOfFirstItem,indexOfLastItem);
   useEffect(() => {
     let incompleteCount = list.filter(item => !item.complete).length;
     setIncomplete(incompleteCount);
-    document.title = `To Do List: ${incomplete}`;
+    // document.title = `To Do List: ${incomplete}`;
   }, [list]);
 
   return (
     <>
-      <header>
-        <h1>To Do List: {incomplete} items pending</h1>
-      </header>
-
-      <form onSubmit={handleSubmit}>
-
-        <h2>Add To Do Item</h2>
-
-        <label>
-          <span>To Do Item</span>
-          <input onChange={handleChange} name="text" type="text" placeholder="Item Details" />
-        </label>
-
-        <label>
-          <span>Assigned To</span>
-          <input onChange={handleChange} name="assignee" type="text" placeholder="Assignee Name" />
-        </label>
-
-        <label>
-          <span>Difficulty</span>
-          <input onChange={handleChange} defaultValue={3} type="range" min={1} max={5} name="difficulty" />
-        </label>
-
-        <label>
-          <button type="submit">Add Item</button>
-        </label>
-      </form>
-
-      {list.map(item => (
-        <div key={item.id}>
-          <p>{item.text}</p>
-          <p><small>Assigned to: {item.assignee}</small></p>
-          <p><small>Difficulty: {item.difficulty}</small></p>
-          <div onClick={() => toggleComplete(item.id)}>Complete: {item.complete.toString()}</div>
-          <hr />
-        </div>
-      ))}
-
+      <div style={{width:"70%", margin:"auto"}}>
+      <Header incomplete={incomplete} />
+      <div style={{display:"flex"}}> 
+      <Form addItem={addItem}/>
+      <div style={{width:"100%"}}>
+      <List toggleComplete={toggleComplete} list={currentItem} incomplete={incomplete} deleteItem={deleteItem}/>
+      </div>
+      </div>
+      </div>
+      <Pagination totalItems={list.length } itemsPerPages={itemsPerPages} paginate={paginate} />
     </>
   );
 };
