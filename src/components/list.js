@@ -2,16 +2,11 @@ import { Button, Card, Elevation, Icon } from "@blueprintjs/core";
 import React from "react";
 
 export default function List(props) {
-  const { list, toggleComplete, deleteItem,showComplete } = props;
-  let activeList=[];
-if(showComplete){
-activeList=list;
-}else{
-  activeList= list.filter(item => !item.complete);
-}
+  const { list, toggleComplete, deleteItem } = props;
+ 
   return (
     <>
-      {activeList.map((item) => (
+      {list.map((item) => (
         <div key={item.id}>
           <Card
             className="card-result"
