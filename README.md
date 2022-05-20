@@ -1,5 +1,7 @@
 ### UML 
 ## phase_1
+[phase-1 PR](https://github.com/idreesalmasri/todo-app/pull/4)
+
  we’re going to perform some refactoring of the To Do application as built by another team. This application mixes application state and user settings at the top level and passes things around. It was a good proof of concept, but we need to make this production ready.
 
 ![UML](./uml31.PNG)
