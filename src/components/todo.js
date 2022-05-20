@@ -7,20 +7,28 @@ import { v4 as uuid } from 'uuid';
 import Header from './header.js';
 const ToDo = () => {
   const states = useContext(SettingContext);
-  // const [list, setList] = useState([]);
-  // const [incomplete, setIncomplete] = useState([]);
-  // const [currentPage,setCurrentPage]=useState(1);
-  // const [itemsPerPages,setItemPerPages]=useState(3);
+  let stringfiedData;
   const paginate = pageNumber => states.setCurrentPage(pageNumber);
-  function addItem(item) {
+   function addItem(item) {
     item.id = uuid();
     item.complete = false;
     states.setList([...states.list, item]);
+    // console.log(item);
+    stringfiedData=JSON.stringify([...states.list, item]);
+        localStorage.setItem("list",stringfiedData)
   }
-
+  function itemPerPage(e){
+    states.setItemPerPages(e.target.value)
+  }
+  function showComleteToggle(){
+      states.setShowComplete(!states.showComplete);
+      console.log(states.showComplete);
+    }
   function deleteItem(id) {
     const items = states.list.filter( item => item.id !== id );
     states.setList(items);
+        stringfiedData=JSON.stringify(items);
+        localStorage.setItem("list",stringfiedData);
   }
   
   function toggleComplete(id) {
@@ -28,6 +36,8 @@ const ToDo = () => {
     const items = states.list.map( item => {
       if ( item.id === id ) {
         item.complete = ! item.complete;
+        stringfiedData=JSON.stringify([...states.list]);
+        localStorage.setItem("list",stringfiedData)
       }
       return item;
     });
@@ -35,6 +45,8 @@ const ToDo = () => {
     states.setList(items);
 
   }
+  
+
 const indexOfLastItem=states.currentPage*states.itemsPerPages;
 const indexOfFirstItem=indexOfLastItem-states.itemsPerPages;
 const currentItem=states.list.slice(indexOfFirstItem,indexOfLastItem);
@@ -51,9 +63,9 @@ const currentItem=states.list.slice(indexOfFirstItem,indexOfLastItem);
       <div style={{width:"70%", margin:"auto"}}>
       <Header incomplete={states.incomplete} />
       <div style={{display:"flex"}}> 
-      <Form addItem={addItem} showComplete={states.showComplete}  />
+      <Form addItem={addItem} showComplete={states.showComplete} showComleteToggle={showComleteToggle} itemPerPage={itemPerPage} />
       <div style={{width:"100%"}}>
-      <List toggleComplete={toggleComplete} list={currentItem} incomplete={states.incomplete} deleteItem={deleteItem} showComplete={states.showComplete}/>
+      <List toggleComplete={toggleComplete} list={currentItem}  deleteItem={deleteItem} showComplete={states.showComplete} />
       </div>
       </div>
       </div>

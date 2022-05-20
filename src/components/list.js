@@ -2,11 +2,16 @@ import { Button, Card, Elevation, Icon } from "@blueprintjs/core";
 import React from "react";
 
 export default function List(props) {
-  const { list, toggleComplete, deleteItem } = props;
- 
+  const { list, toggleComplete, deleteItem,showComplete } = props;
+  let activeList=[];
+  if(showComplete){
+  activeList=list;
+  }else{
+    activeList= list.filter(item => !item.complete);
+  }
   return (
     <>
-      {list.map((item) => (
+      {activeList.map((item) => (
         <div key={item.id}>
           <Card
             className="card-result"
@@ -24,7 +29,7 @@ export default function List(props) {
                   }
                   onClick={() => toggleComplete(item.id)}
                 >
-                  {item.complete ? 'complete' : 'pending'}
+                  {item.complete ? 'completed' : 'pending'}
                   {/* {item.complete.toString()} */}
                 </Button>
                 <span style={{ position: "absolute", right: "50%" }}>
