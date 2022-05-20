@@ -1,65 +1,71 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect,useContext } from 'react';
 import List from './list.js';
 import Form from './form.js';
+import { SettingContext } from '../context/setting'
 import Pagination from './pagination';
 import { v4 as uuid } from 'uuid';
 import Header from './header.js';
 const ToDo = () => {
-
-  const [list, setList] = useState([]);
-  const [incomplete, setIncomplete] = useState([]);
-  const [currentPage,setCurrentPage]=useState(1);
-  const [itemsPerPages,setItemPerPages]=useState(3);
-  const paginate = pageNumber => setCurrentPage(pageNumber);
+  const states = useContext(SettingContext);
+  // const [list, setList] = useState([]);
+  // const [incomplete, setIncomplete] = useState([]);
+  // const [currentPage,setCurrentPage]=useState(1);
+  // const [itemsPerPages,setItemPerPages]=useState(3);
+  const paginate = pageNumber => states.setCurrentPage(pageNumber);
   function addItem(item) {
-    console.log(item);
     item.id = uuid();
-    // console.log(item.id);
     item.complete = false;
-    setList([...list, item]);
-    // console.log("list",list);
+    states.setList([...states.list, item]);
   }
-
+function itemPerPage(e){
+  states.setItemPerPages(e.target.value)
+}
   function deleteItem(id) {
-    const items = list.filter( item => item.id !== id );
-    setList(items);
+    const items = states.list.filter( item => item.id !== id );
+    states.setList(items);
   }
-
+  function showComleteToggle(){
+    states.setShowComplete(!states.showComplete);
+    console.log(states.showComplete);
+  }
   function toggleComplete(id) {
 
-    const items = list.map( item => {
-      if ( item.id == id ) {
+    const items = states.list.map( item => {
+      if ( item.id === id ) {
         item.complete = ! item.complete;
       }
       return item;
     });
 
-    setList(items);
+    states.setList(items);
 
   }
-const indexOfLastItem=currentPage*itemsPerPages;
-const indexOfFirstItem=indexOfLastItem-itemsPerPages;
-const currentItem=list.slice(indexOfFirstItem,indexOfLastItem);
+const indexOfLastItem=states.currentPage*states.itemsPerPages;
+const indexOfFirstItem=indexOfLastItem-states.itemsPerPages;
+const currentItem=states.list.slice(indexOfFirstItem,indexOfLastItem);
+
+
   useEffect(() => {
-    let incompleteCount = list.filter(item => !item.complete).length;
-    setIncomplete(incompleteCount);
+    let incompleteCount = states.list.filter(item => !item.complete).length;
+    states.setIncomplete(incompleteCount);
     // document.title = `To Do List: ${incomplete}`;
-  }, [list]);
+  }, [states.list]);
 
   return (
     <>
       <div style={{width:"70%", margin:"auto"}}>
-      <Header incomplete={incomplete} />
+      <Header incomplete={states.incomplete} />
       <div style={{display:"flex"}}> 
-      <Form addItem={addItem}/>
+      <Form addItem={addItem} showComplete={states.showComplete} setShowComplete={states.setShowComplete} showComleteToggle={showComleteToggle} itemPerPage={itemPerPage}/>
       <div style={{width:"100%"}}>
-      <List toggleComplete={toggleComplete} list={currentItem} incomplete={incomplete} deleteItem={deleteItem}/>
+      <List toggleComplete={toggleComplete} list={currentItem} incomplete={states.incomplete} deleteItem={deleteItem} showComplete={states.showComplete}/>
       </div>
       </div>
       </div>
-      <Pagination totalItems={list.length } itemsPerPages={itemsPerPages} paginate={paginate} />
+      <Pagination totalItems={states.list.length } itemsPerPages={states.itemsPerPages} paginate={paginate} currentPage={states.currentPage} />
     </>
   );
 };
+
 
 export default ToDo;
