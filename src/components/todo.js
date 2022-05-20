@@ -17,17 +17,12 @@ const ToDo = () => {
     item.complete = false;
     states.setList([...states.list, item]);
   }
-function itemPerPage(e){
-  states.setItemPerPages(e.target.value)
-}
+
   function deleteItem(id) {
     const items = states.list.filter( item => item.id !== id );
     states.setList(items);
   }
-  function showComleteToggle(){
-    states.setShowComplete(!states.showComplete);
-    console.log(states.showComplete);
-  }
+  
   function toggleComplete(id) {
 
     const items = states.list.map( item => {
@@ -56,7 +51,7 @@ const currentItem=states.list.slice(indexOfFirstItem,indexOfLastItem);
       <div style={{width:"70%", margin:"auto"}}>
       <Header incomplete={states.incomplete} />
       <div style={{display:"flex"}}> 
-      <Form addItem={addItem} showComplete={states.showComplete} setShowComplete={states.setShowComplete} showComleteToggle={showComleteToggle} itemPerPage={itemPerPage}/>
+      <Form addItem={addItem} showComplete={states.showComplete}  />
       <div style={{width:"100%"}}>
       <List toggleComplete={toggleComplete} list={currentItem} incomplete={states.incomplete} deleteItem={deleteItem} showComplete={states.showComplete}/>
       </div>
