@@ -19,3 +19,10 @@ Describe the operation of the hook: useForm()
 React Hook Form takes a slightly different approach than other form libraries in the React ecosystem by adopting the use of uncontrolled inputs using ref instead of depending on the state to control the inputs. This approach makes the forms more performant and reduces the number of re-renders.
 useForm is a hook that allows for management forms. It has some action methods that create, edit and clone the form. The hook return value comes according to the called action and it can run different logic depending on the action.
 
+## phase-2  
+[phase-2 PR]9https://github.com/idreesalmasri/todo-app/pull/5)  
+
+in this phase i Provide the users with a form where they can change the values of # of items per page and Whether or not to show completed items.  
+also  
+saved the user's choices in Local Storage.  
+Each time they will re-visit the page, their choices will still be there and can remove any todo.
