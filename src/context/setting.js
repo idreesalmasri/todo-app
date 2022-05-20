@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 export const SettingContext = React.createContext();
 
 export default function StateProvider(props) {
@@ -20,6 +20,12 @@ export default function StateProvider(props) {
         setCurrentPage,
         setItemPerPages
     }
+    useEffect(() => {
+        const items = JSON.parse(localStorage.getItem('list'));
+        if (items) {
+         setList(items);
+        }
+      }, []);
     return (
         <SettingContext.Provider value={state}>
             {props.children}
