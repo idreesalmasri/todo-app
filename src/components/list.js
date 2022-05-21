@@ -1,15 +1,34 @@
 import { Button, Card, Elevation, Icon } from "@blueprintjs/core";
 import { useContext } from "react";
 import React from "react";
-import { SettingContext } from '../context/setting'
+import { SettingContext } from "../context/setting";
 export default function List(props) {
-  const states = useContext(SettingContext)
-  const { list,toggleComplete, deleteItem } = props;
-  let activeList=[];
-  if(states.showComplete){
-  activeList=list;
-  }else{
-    activeList= list.filter(item => !item.complete);
+  function deleteItem(id) {
+    const items = states.list.filter((item) => item.id !== id);
+    states.setList(items);
+    stringfiedData = JSON.stringify(items);
+    localStorage.setItem("list", stringfiedData);
+  }
+  let stringfiedData;
+  const states = useContext(SettingContext);
+  const { list } = props;
+  function toggleComplete(id) {
+    const items = states.list.map((item) => {
+      if (item.id === id) {
+        item.complete = !item.complete;
+        stringfiedData = JSON.stringify([...states.list]);
+        localStorage.setItem("list", stringfiedData);
+      }
+      return item;
+    });
+
+    states.setList(items);
+  }
+  let activeList = [];
+  if (states.showComplete) {
+    activeList = list;
+  } else {
+    activeList = list.filter((item) => !item.complete);
   }
   return (
     <>
@@ -31,7 +50,7 @@ export default function List(props) {
                   }
                   onClick={() => toggleComplete(item.id)}
                 >
-                  {item.complete ? 'completed' : 'pending'}
+                  {item.complete ? "completed" : "pending"}
                   {/* {item.complete.toString()} */}
                 </Button>
                 <span style={{ position: "absolute", right: "50%" }}>
