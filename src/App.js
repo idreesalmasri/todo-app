@@ -3,7 +3,7 @@ import React from 'react';
 
 
 import ToDo from './components/todo.js';
-import "./App.scss"
+import "./App.css"
 import Header from './components/header/header.js';
 import Footer from './components/footer/footer.js';
 import StateProvider from "./context/setting";
