@@ -1,8 +1,12 @@
 import useForm from '../hooks/form.js';
+import { useContext } from 'react';
 import { Button, Card, Elevation,Switch } from "@blueprintjs/core";
+import { SettingContext } from '../context/setting'
+;
 export default function Form(props){
-const {addItem ,showComplete,showComleteToggle,itemPerPage}=props;
+const {addItem }=props;
     const { handleChange, handleSubmit } = useForm(addItem);
+    const states = useContext(SettingContext)
     return(
         <form onSubmit={handleSubmit}>
 <Card className="card-submit" elevation={Elevation.TWO} style={{marginRight:"20px"}}>
@@ -25,10 +29,10 @@ const {addItem ,showComplete,showComleteToggle,itemPerPage}=props;
         <hr />
       < label>
           <p>items per page:</p>
-          <input onChange={itemPerPage} defaultValue={3} type="range" min={1} max={5} name="items per page" />
+          <input onChange={states.itemPerPage} defaultValue={3} type="range" min={1} max={5} name="items per page" />
         </label>
         <hr />
-        <Switch checked={showComplete} label="show completed items" onChange={showComleteToggle} />
+        <Switch checked={states.showComplete} label="show completed items" onChange={states.showComleteToggle} />
         <hr />
         <label>
           <Button type="submit">Add Item</Button>

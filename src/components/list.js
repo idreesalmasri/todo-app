@@ -1,10 +1,12 @@
 import { Button, Card, Elevation, Icon } from "@blueprintjs/core";
+import { useContext } from "react";
 import React from "react";
-
+import { SettingContext } from '../context/setting'
 export default function List(props) {
-  const { list, toggleComplete, deleteItem,showComplete } = props;
+  const states = useContext(SettingContext)
+  const { list,toggleComplete, deleteItem } = props;
   let activeList=[];
-  if(showComplete){
+  if(states.showComplete){
   activeList=list;
   }else{
     activeList= list.filter(item => !item.complete);

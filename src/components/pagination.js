@@ -1,9 +1,12 @@
 
 import React from "react";
+import { useContext } from "react";
+import { SettingContext } from '../context/setting'
 
-const Pagination=({itemsPerPages,totalItems,paginate,currentPage})=>{
+const Pagination=({totalItems,paginate,currentPage})=>{
+  const states = useContext(SettingContext)
 const pageNumber=[];
-for (let i = 1; i <= Math.ceil(totalItems / itemsPerPages); i++) {
+for (let i = 1; i <= Math.ceil(totalItems / states.itemsPerPages); i++) {
     pageNumber.push(i);
   }
   return(
@@ -20,7 +23,7 @@ for (let i = 1; i <= Math.ceil(totalItems / itemsPerPages); i++) {
           </li>
           
         ))}
-        <li className="page-item"><a className="page-link" href="/#" onClick={() =>currentPage<(Math.ceil(totalItems / itemsPerPages))? paginate(currentPage+1):null} style={{backgroundColor:"blue",color:"white"}}>Next</a></li>
+        <li className="page-item"><a className="page-link" href="/#" onClick={() =>currentPage<(Math.ceil(totalItems / states.itemsPerPages))? paginate(currentPage+1):null} style={{backgroundColor:"blue",color:"white"}}>Next</a></li>
       </ul>
     </nav>
   )

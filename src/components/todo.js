@@ -64,13 +64,13 @@ const currentItem=states.list.slice(indexOfFirstItem,indexOfLastItem);
       <div style={{width:"70%", margin:"auto"}}>
       <Header incomplete={states.incomplete} />
       <div style={{display:"flex"}}> 
-      <Form addItem={addItem} showComplete={states.showComplete} showComleteToggle={showComleteToggle} itemPerPage={itemPerPage} />
+      <Form addItem={addItem} />
       <div style={{width:"100%"}}>
-      <List toggleComplete={toggleComplete} list={currentItem}  deleteItem={deleteItem} showComplete={states.showComplete} />
+      <List toggleComplete={toggleComplete} list={currentItem}  deleteItem={deleteItem} />
       </div>
       </div>
       </div>
-      <Pagination totalItems={states.list.length } itemsPerPages={states.itemsPerPages} paginate={paginate} currentPage={states.currentPage} />
+      <Pagination totalItems={states.list.length }  paginate={paginate} currentPage={states.currentPage} />
     </>
   );
 };
