@@ -5,13 +5,12 @@ import { SettingContext } from "../context/setting";
 import { v4 as uuid } from "uuid";
 export default function Form() {
   const states = useContext(SettingContext);
-  // const {addItem }=props;
+  
   let stringfiedData;
   function addItem(item) {
     item.id = uuid();
     item.complete = false;
     states.setList([...states.list, item]);
-    // console.log(item);
     stringfiedData = JSON.stringify([...states.list, item]);
     localStorage.setItem("list", stringfiedData);
   }
@@ -20,7 +19,6 @@ export default function Form() {
   }
   function showComleteToggle() {
     states.setShowComplete(!states.showComplete);
-    // console.log(states.showComplete);
   }
   const { handleChange, handleSubmit } = useForm(addItem);
   
