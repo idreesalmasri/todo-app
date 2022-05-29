@@ -2,6 +2,7 @@ import { Button, Card, Elevation, Icon } from "@blueprintjs/core";
 import { useContext } from "react";
 import React from "react";
 import { SettingContext } from "../context/setting";
+import Capability from "./capability"
 export default function List(props) {
   function deleteItem(id) {
     const items = states.list.filter((item) => item.id !== id);
@@ -55,9 +56,11 @@ export default function List(props) {
                 </Button>
                 <span style={{ position: "absolute", right: "50%" }}>
                   {" "}
+                  
                   Assigned To : {item.assignee}
                 </span>
               </div>
+              <Capability capability="delete">
               <Button
                 className="delete"
                 onClick={() => deleteItem(item.id)}
@@ -65,6 +68,7 @@ export default function List(props) {
               >
                 <Icon icon="cross" size={20} />
               </Button>
+              </Capability>
             </div>
             <hr />
             <div className="card-text">
