@@ -37,11 +37,11 @@ new functionality in this phase
 - make sure that my To Do items are only viewable to users that have logged in with a valid account.  
 and for phase-4 
 i added the acl so that just the admin can delete items 
-and the regular user cant delete items 
+and the regular user cant delete items  
 admin information :  
-username: idrees
-password: test  
-user information:  
+username: idrees  
+password: test    
+user information:    
 username :idrees0  
 password : test0  
 for regular user the button that delete the items doesnot rendere so he cant delete items 
