@@ -27,3 +27,21 @@ in this phase i Provide the users with a form where they can change the values o
 also  
 saved the user's choices in Local Storage.  
 Each time they will re-visit the page, their choices will still be there and can remove any todo.
+
+## Phase-3-4
+[PR](https://github.com/idreesalmasri/todo-app/pull/12)
+requiring users be logged in to view items and also restrict access based on user type.  
+new functionality in this phase  
+- provide a way for other users to create new accounts.  
+- provide a way for all users to login to their account.  
+- make sure that my To Do items are only viewable to users that have logged in with a valid account.  
+and for phase-4 
+i added the acl so that just the admin can delete items 
+and the regular user cant delete items 
+admin information :  
+username: idrees
+password: test  
+user information:  
+username :idrees0  
+password : test0  
+for regular user the button that delete the items doesnot rendere so he cant delete items 
