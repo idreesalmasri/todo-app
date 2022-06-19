@@ -11,11 +11,11 @@ export default function Header() {
       style={{ backgroundColor: "rgb(14, 194, 226)", marginBottom: "20px" }}
     >
       <Navbar.Group>
-        <Navbar.Heading>HOME</Navbar.Heading>
+        <Navbar.Heading >TODO_List</Navbar.Heading>
         <When condition={auth.loggedIn}>
           <label>
             <button
-              style={{ marginLeft: "20px" }}
+              style={{ marginLeft: "1350px" }}
               type="button"
               onClick={auth.logout}
               className="btn btn-danger"

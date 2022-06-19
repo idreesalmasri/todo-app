@@ -17,9 +17,10 @@ const handelLogIn=(e)=>{
   return (
     <>
       <When condition={!auth.registered}>
-        <form style={{width:"30%" ,marginLeft:"20px" }}>
-          <div className="form-group">
-            <label htmlFor="User Name">User Name :</label>
+        <div style={{textAlign: "center",marginTop:"70px"}}>
+        <form style={{width:"30%",marginLeft:"20px",borderStyle:"outset",borderRadius: "10px",backgroundColor: "#f2f2f2", display: "inline-block"}}>
+          <div className="form-group" style={{marginBottom:"20px"}}>
+            <label htmlFor="User Name" style={{fontSize: "20px"}}>User Name :</label>
             <input 
               onChange={e=>setUsername(e.currentTarget.value)}
               type="text"
@@ -28,10 +29,10 @@ const handelLogIn=(e)=>{
               placeholder="Enter User Name"
               required
             />
-            <hr></hr>
+            
           </div>
-          <div className="form-group">
-            <label htmlFor="exampleInputPassword1">Password :</label>
+          <div className="form-group" style={{marginBottom:"20px"}}>
+            <label htmlFor="exampleInputPassword1" style={{fontSize: "20px"}}>Password :</label>
             <input
               onChange={e=>setPassword(e.currentTarget.value)}
               type="password"
@@ -41,14 +42,15 @@ const handelLogIn=(e)=>{
               required
             />
           </div>
-          <hr></hr>
-          <button type="submit" className="btn btn-primary" onClick={handelLogIn}>
+          
+          <button type="submit" className="btn btn-success" onClick={handelLogIn} style={{marginBottom:"20px"}}>
             login
           </button>
+          <br/>
+        <label style={{fontSize: "20px"}}> register if you don't have an account </label><br/>
+      <button type="button" onClick={auth.renderedForm} className="btn btn-primary" style={{marginTop:"10px"}}>register</button>
         </form>
-        <hr></hr>
-        <label style={{marginLeft:"20px"}}> register if you don't have an account </label><br/>
-      <button type="button" onClick={auth.renderedForm} className="btn btn-outline-primary" style={{marginTop:"10px",marginLeft:"20px"}}>register</button>
+        </div>
       
       </When>
       
