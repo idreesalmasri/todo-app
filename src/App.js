@@ -10,7 +10,7 @@ import StateProvider from "./context/setting";
 export default class App extends React.Component {
   render() {
     return (
-      <>
+      <div style={{backgroundColor:"#d9e3f0",height:"100vh"}}>
       
       <LoginProvider>
       <StateProvider>
@@ -19,7 +19,7 @@ export default class App extends React.Component {
       </StateProvider>
       </LoginProvider>
       <Footer/>
-      </>
+      </div>
     );
   }
 }

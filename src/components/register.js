@@ -21,9 +21,10 @@ export default function Register() {
   return (
     <>
       <When condition={auth.registered}>
-        <form style={{width:"30%",marginLeft:"20px"}}>
-          <div className="form-group">
-            <label htmlFor="User Name">User Name</label>
+        <div style={{textAlign: "center",marginTop:"70px"}}>
+        <form style={{width:"30%",marginLeft:"20px",borderStyle:"outset",borderRadius: "10px",backgroundColor: "#f2f2f2",display: "inline-block"}}>
+          <div className="form-group" style={{marginBottom:"20px",fontSize: "20px"}}>
+            <label htmlFor="User Name">User Name :</label>
             <input
               onChange={handleChange}
               type="text"
@@ -34,9 +35,9 @@ export default function Register() {
               required
             />
           </div>
-          <hr></hr>
-          <div className="form-group">
-            <label htmlFor="exampleInputPassword1">Password</label>
+          
+          <div className="form-group" style={{marginBottom:"20px"}}>
+            <label htmlFor="exampleInputPassword1" style={{fontSize: "20px"}}>Password :</label>
             <input
               onChange={handleChange}
               type="password"
@@ -47,10 +48,10 @@ export default function Register() {
               required
             />
           </div>
-          <hr></hr>
-          <label htmlFor="role"> Choose a role :</label>
+          
+          <label htmlFor="role" style={{fontSize: "20px"}}> Choose a role :</label>
 
-          <select name="role" id="role" onChange={handleChange}>
+          <select name="role" id="role" onChange={handleChange} style={{marginLeft:"20px"}}>
             <option className="btn btn-outline-primary" value="user">
               user
             </option>
@@ -59,21 +60,22 @@ export default function Register() {
             </option>
           </select>
           <br></br>
-          <hr></hr>
-          <button type="submit" onClick={handelSubmit} className="btn btn-primary">
+          
+          <button type="submit" onClick={handelSubmit} className="btn btn-success" style={{marginTop:"20px"}}>
             Signup
           </button>
-        </form>
-        <hr></hr>
-        <label>
-          <button style={{marginLeft:"20px" }}
+          <label><br/>
+          <button 
+          className="btn btn-primary" 
+          style={{marginTop:"20px",marginLeft:"20px"}}
             type="button"
             onClick={auth.renderedForm}
-            className="btn btn-outline-primary"
           >
             login
           </button>
         </label>
+        </form>
+        </div>
       </When>
     </>
   );

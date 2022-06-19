@@ -11,7 +11,8 @@ const Pagination = () => {
     pageNumber.push(i);
   }
   return (
-    <nav>
+    
+    <nav >
       <ul className="pagination" style={{ position: "absolute", right: "50%" }}>
         <li className="page-item">
           <a
@@ -29,7 +30,7 @@ const Pagination = () => {
           <li key={number} className="page-item">
             <a
               onClick={() => paginate(number)}
-              href="/!#"
+              href="!#"
               className="page-link"
             >
               {number}
